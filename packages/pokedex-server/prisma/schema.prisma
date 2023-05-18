@@ -1,0 +1,87 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Team {
+  id        Int      @id @default(autoincrement())
+  updatedAt DateTime @updatedAt
+
+  createdAt DateTime @default(now())
+
+  pokemons Pokemon[]
+}
+
+model Pokemon {
+  id        Int      @id
+  updatedAt DateTime @updatedAt
+
+  createdAt DateTime @default(now())
+
+  /// @HideField({ output: true, input: true })
+  nameId Int         @unique
+  name   PokemonName @relation(fields: [nameId], references: [id])
+
+  /// @HideField({ output: true, input: true })
+  baseId Int       @unique
+  base   BaseStats @relation(fields: [baseId], references: [id])
+
+  type PokemonType[]
+  
+  teams Team[]
+}
+
+model PokemonName {
+  id        Int      @id @default(autoincrement())
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  /// @HideField({ output: true, input: true })
+  pokemon Pokemon?
+
+  english  String
+  japanese String
+  chinese  String
+  french   String
+}
+
+model BaseStats {
+  id        Int      @id @default(autoincrement())
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  hp        Int
+  attack    Int
+  defense   Int
+  spAttack  Int
+  spDefense Int
+  speed     Int
+
+  /// @HideField({ output: true, input: true })
+  pokemon Pokemon?
+}
+
+enum PokemonType {
+  NORMAL
+  FIGHTING
+  FLYING
+  POISON
+  GROUND
+  ROCK
+  BUG
+  GHOST
+  STEEL
+  FIRE
+  WATER
+  GRASS
+  ELECTRIC
+  PSYCHIC
+  ICE
+  DRAGON
+  DARK
+  FAIRY
+}

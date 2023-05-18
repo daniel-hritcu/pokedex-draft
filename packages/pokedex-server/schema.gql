@@ -1,0 +1,76 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type BaseStats {
+  attack: Int!
+  defense: Int!
+  hp: Int!
+  id: ID!
+  spAttack: Int!
+  spDefense: Int!
+  speed: Int!
+}
+
+type Mutation {
+  createTeam(
+    """The IDs of the Pokemon to add to the team. Up to 5."""
+    pokemonIds: [Int!]!
+  ): Team
+  updateTeam(
+    id: [Int!]!
+
+    """The IDs of the Pokemon to add to the team. Up to 5."""
+    pokemonIds: [Int!]!
+  ): Team
+}
+
+type Pokemon {
+  base: BaseStats!
+  id: ID!
+  name: PokemonName!
+  type: [PokemonType!]
+}
+
+type PokemonName {
+  chinese: String!
+  english: String!
+  french: String!
+  id: ID!
+  japanese: String!
+}
+
+enum PokemonType {
+  BUG
+  DARK
+  DRAGON
+  ELECTRIC
+  FAIRY
+  FIGHTING
+  FIRE
+  FLYING
+  GHOST
+  GRASS
+  GROUND
+  ICE
+  NORMAL
+  POISON
+  PSYCHIC
+  ROCK
+  STEEL
+  WATER
+}
+
+type Query {
+  pokemon(id: Int): Pokemon
+  pokemonCount: Int!
+  pokemons(name: String, skip: Int, take: Int, type: [PokemonType!]): [Pokemon!]!
+  team(id: Int): Team
+  teamCount: Int!
+  teams(skip: Int, take: Int): [Team!]!
+}
+
+type Team {
+  id: ID!
+  pokemons: [Pokemon!]!
+}

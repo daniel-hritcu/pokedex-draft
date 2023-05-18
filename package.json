@@ -1,0 +1,21 @@
+{
+  "name": "pokedex",
+  "version": "0.0.1",
+  "scripts": {
+    "docker:up": "docker-compose --env-file .env up -d",
+    "docker:down": "docker-compose down"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "next": "13.4.2",
+    "typescript": "^5.0.4"
+  },
+  "pnpm": {
+    "allowedDeprecatedVersions": {
+      "superagent": "6.1.0",
+      "formidable": "1.2.6",
+      "sourcemap-codec": "1.4.8",
+      "subscriptions-transport-ws": "0.11.0"
+    }
+  }
+}
